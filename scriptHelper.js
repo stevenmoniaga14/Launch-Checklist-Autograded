@@ -10,11 +10,11 @@ require('cross-fetch/polyfill');
         return "Empty";
     } else if (isNaN(testInput)) {
         return "Not a Number";
-    } else {
+    } else if (!isNaN(testInput))
         return "Is a Number"
     }
 
-}
+
 
 /* formSubmission function to be passed in the eventListener "submit"  Task 2 */
  
@@ -54,10 +54,12 @@ require('cross-fetch/polyfill');
     let isLaunchReady = true;
 
 /* Validation of fuel level and cargo mass Task 2 */
+
 if (fuelNum < 10000 && cargoNum > 10000) {
     fuelStatus.innerHTML = "Fuel level too low for launch";
     cargoStatus.innerHTML = "Cargo mass too heavy for launch";
     isLaunchReady = false;
+
 } else if (fuelNum < 10000) {
     fuelStatus.innerHTML = "Fuel level too low for launch";
     isLaunchReady = false;
@@ -65,10 +67,15 @@ if (fuelNum < 10000 && cargoNum > 10000) {
     fuelStatus.innerHTML = "Fuel level high enough for launch";
     cargoStatus.innerHTML = "Cargo mass too heavy for launch";
     isLaunchReady = false;
+} else if (pilotValid === "Is a Number" || copilotValid === "Is a Number") {
+    isLaunchReady = false;
+} else if (fuelValid === "Not a Number" || cargoValid === "Not a Number") {
+    isLaunchReady = false;
+
 } else {
-    fuelStatus.innerHTML = "Fuel level high enough for launch";
-    cargoStatus.innerHTML = "Cargo mass low enough for launch";
-    isLaunchReady = true;
+        fuelStatus.innerHTML = "Fuel level high enough for launch";
+        cargoStatus.innerHTML = "Cargo mass low enough for launch"
+        isLaunchReady = true;
 }
 
 if (isLaunchReady) {
@@ -80,8 +87,9 @@ if (isLaunchReady) {
     launchStatus.style.color = "red";
     list.style.visibility = "visible";
 }
+ }
 
-};
+;
 
 /* ------------------------------------------- */
 
